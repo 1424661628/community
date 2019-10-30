@@ -5,13 +5,16 @@ import com.lvmen.community.dto.GithubUser;
 import com.lvmen.community.mapper.UserMapper;
 import com.lvmen.community.model.User;
 import com.lvmen.community.provider.GithubProvider;
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
@@ -36,7 +39,8 @@ public class AuthorizeController {
     @GetMapping(value = "/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request){
+                           HttpServletRequest request,
+                           HttpServletResponse response){
 
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
@@ -50,17 +54,21 @@ public class AuthorizeController {
 
         if(githubUser != null){
 
-            // 登录成功，写cookie和写session
+            // 登录成功
             System.out.println(githubUser.getName() + "登录成功了！");
             User user = new User();
-            user.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
 
+            // 写session
             userMapper.insert(user);
-            request.getSession().setAttribute("user", githubUser); // 我们把信息放到session中，服务器就可以读取session中的对象。cookie也会有一个JSESSIONID的cookie
+            // 写cookie
+            response.addCookie(new Cookie("token", token));
+//            request.getSession().setAttribute("user", githubUser); // 我们把信息放到session中，服务器就可以读取session中的对象。cookie也会有一个JSESSIONID的cookie
             return "redirect:/"; // 重定向到index
 
         }else {

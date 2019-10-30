@@ -42,6 +42,10 @@ git commit --amend --no-edit
 
 git push
 
+git pull 和  :x 进行merge
+
+
+
 ## 快捷键
 ctrl+shift+f12 当前窗口最大化，返回上一个窗口
 
