@@ -22,7 +22,7 @@
 
 [SpringBoot Reference Documents](https://docs.spring.io/spring-boot/docs/2.2.0.RELEASE/reference/html/index.html)
 
-[flyway](https://flywaydb.org/)
+[flyway migrate](https://flywaydb.org/documentation/maven/migrate)
 
 
 ## 工具
@@ -75,6 +75,9 @@ shift+f6 重命名
 
 ctrl+e 打开最近的文件
 
+ctrl+w 选中区块
+
+ctrl+d 拷贝一行
 
 
 ## 脚本
@@ -122,6 +125,8 @@ baselineOnMigrate
 </plugin>
 ```
 
+使用flyway时，应用启动不成功，找不到Caused by: java.lang.NoClassDefFoundError: org/flywaydb/core/api/configuration/FluentConfiguration
+发现确实没有这个文件。原因是springboot2.x之后需要flyway5.x才行。项目中使用的时4.x。提升一下版本，修改一下配置。
 
 
 

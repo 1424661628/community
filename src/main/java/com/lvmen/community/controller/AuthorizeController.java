@@ -51,7 +51,7 @@ public class AuthorizeController {
         String accessToken = githubProvider.getAccessToken(accessTokenDTO); // 去github请求accessToken
         GithubUser githubUser = githubProvider.getUser(accessToken); // 去github请求用户信息
 
-        if(githubUser != null){
+        if(githubUser != null && githubUser.getId() != null){
 
             // 登录成功
             System.out.println(githubUser.getName() + "登录成功了！");
@@ -69,7 +69,6 @@ public class AuthorizeController {
             response.addCookie(new Cookie("token", token));
 //            request.getSession().setAttribute("user", githubUser); // 我们把信息放到session中，服务器就可以读取session中的对象。cookie也会有一个JSESSIONID的cookie
             return "redirect:/"; // 重定向到index
-
         }else {
             // 登录失败
             return "redirect:/";
