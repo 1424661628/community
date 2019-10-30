@@ -5,7 +5,6 @@ import com.lvmen.community.dto.GithubUser;
 import com.lvmen.community.mapper.UserMapper;
 import com.lvmen.community.model.User;
 import com.lvmen.community.provider.GithubProvider;
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

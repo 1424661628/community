@@ -22,6 +22,8 @@
 
 [SpringBoot Reference Documents](https://docs.spring.io/spring-boot/docs/2.2.0.RELEASE/reference/html/index.html)
 
+[flyway](https://flywaydb.org/)
+
 
 ## 工具
 
@@ -102,6 +104,23 @@ CREATE TABLE `user` (
 response.body().toString()是对象的地址。
 
 然后使用fastjson将json字符串对象解析成我们的复杂对象。
+
+
+使用flyway时，配置不正确。去官网查看文档，要填写url，并且要确定时区
+baselineOnMigrate
+```pom
+<plugin>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-maven-plugin</artifactId>
+    <version>6.0.7</version>
+    <configuration>
+        <url>jdbc:mysql:///community?serverTimezone=Asia/Shanghai</url>
+        <user>root</user>
+        <password>123456</password>
+        <baselineOnMigrate>true</baselineOnMigrate>
+    </configuration>
+</plugin>
+```
 
 
 
