@@ -23,7 +23,7 @@ public class IndexController {
     public String index(HttpServletRequest request) {
 
         Cookie[] cookies = request.getCookies();
-        if (cookies != null){
+        if (cookies != null){ // 一个cookie都没有会出现空指针异常，所以判空
             for (Cookie cookie : cookies){
                 if (cookie.getName().equals("token")){
                     String cookieValue = cookie.getValue();

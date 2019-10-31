@@ -24,6 +24,8 @@
 
 [flyway migrate](https://flywaydb.org/documentation/maven/migrate)
 
+[lombok](https://projectlombok.org/)
+
 
 ## 工具
 
@@ -78,6 +80,8 @@ ctrl+e 打开最近的文件
 ctrl+w 选中区块
 
 ctrl+d 拷贝一行
+
+
 
 
 ## 脚本
