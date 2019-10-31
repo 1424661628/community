@@ -26,6 +26,8 @@
 
 [lombok](https://projectlombok.org/)
 
+[thymeleaf](https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html)
+
 
 ## 工具
 
@@ -131,6 +133,9 @@ baselineOnMigrate
 
 使用flyway时，应用启动不成功，找不到Caused by: java.lang.NoClassDefFoundError: org/flywaydb/core/api/configuration/FluentConfiguration
 发现确实没有这个文件。原因是springboot2.x之后需要flyway5.x才行。项目中使用的时4.x。提升一下版本，修改一下配置。
+
+
+圆图片img-round   白框图片img-thumbnail
 
 
 

@@ -7,7 +7,12 @@ body {
     background-color: white;
 }
 
+.media-object {
+    width: 48px;
+}
+
 .btn-publish {
     float: right;
     margin-bottom: 15px;
 }
+

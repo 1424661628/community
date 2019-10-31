@@ -19,4 +19,6 @@ public class Question {
     private Integer likeCount;
     private String tag;
 
+
+
 }

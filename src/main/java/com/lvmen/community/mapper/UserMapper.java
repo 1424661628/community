@@ -25,4 +25,11 @@ public interface UserMapper {
      */
     @Select("select * from user where token = #{token}")
     User findByToken(String cookieValue);
+
+    /**
+     * 根据主键查找用户
+     * @param id
+     */
+    @Select("select * from user where id = #{id}")
+    User findById(Integer id);
 }
