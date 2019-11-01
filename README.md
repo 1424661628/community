@@ -114,9 +114,15 @@ response.body().toString()是对象的地址。
 
 然后使用fastjson将json字符串对象解析成我们的复杂对象。
 
-
 使用flyway时，配置不正确。去官网查看文档，要填写url，并且要确定时区
-baselineOnMigrate
+baselineOnMigrate 也要配置为true【报错提示】
+
+带有驼峰的属性不能对应到数据库中的列。使用mybatis的驼峰配置
+
+使用thymeleaf的语法遍历集合，格式化日期。。。
+
+
+
 ```pom
 <plugin>
     <groupId>org.flywaydb</groupId>
@@ -146,6 +152,21 @@ baselineOnMigrate
 
 连接h2数据库不成功，改为实用更加熟悉的mysql数据库。配置dataSource时，连接数据库报`需要设置TimeZone`，我们设置时区为上海的就行。
 spring.datasource.url=jdbc:mysql:///community?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+
+
+## 答疑
+
+1. thymeleaf的回显。```<textarea class="form-control" id="description" name="description" th:value="${description}" placeholder="问题..." cols="30" rows="10"></textarea>```
+
+有的可以使用 th:value 有的要是用th:text
+
+2. fastjson的自动将_转为驼峰命名。【从前台过来的数据，】
+
+3. 格式化日期
+
+
+
+
 
 
 

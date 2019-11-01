@@ -14,5 +14,5 @@ public class GithubUser implements Serializable {
     private String name;
     private Long id;
     private String bio; // BIO的描述
-    private String avatar_url; // 头像地址
+    private String avatarUrl; // 头像地址
 }

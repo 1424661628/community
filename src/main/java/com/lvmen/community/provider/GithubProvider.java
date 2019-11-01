@@ -55,7 +55,7 @@ public class GithubProvider {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String result = response.body().string(); // string() 方法是获取返回过来的body中的内容。
-            GithubUser githubUser = JSON.parseObject(result, GithubUser.class); // 将json字符串反序列化为对象
+            GithubUser githubUser = JSON.parseObject(result, GithubUser.class); // 将json字符串反序列化为对象，【可以自动驼峰】
             return githubUser;
         } catch (IOException e) {
             e.printStackTrace();
