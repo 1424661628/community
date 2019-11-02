@@ -83,6 +83,10 @@ ctrl+w 选中区块
 
 ctrl+d 拷贝一行
 
+ctrl+shift+alt+? 保养maintenance registry
+
+ctrl+alt+s 设置settings  
+
 
 
 
@@ -142,6 +146,8 @@ baselineOnMigrate 也要配置为true【报错提示】
 
 
 圆图片img-round   白框图片img-thumbnail
+
+自动化部署buildAllow auto-make to start even if developed application is currently running. Note that automatically started make may eventually delete some classes that are required by the application.
 
 
 

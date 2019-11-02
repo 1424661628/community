@@ -1,5 +1,6 @@
 package com.lvmen.community.service;
 
+import com.lvmen.community.dto.PaginationDTO;
 import com.lvmen.community.dto.QuestionDTO;
 import com.lvmen.community.mapper.QuestionMapper;
 import com.lvmen.community.mapper.UserMapper;
@@ -24,9 +25,30 @@ public class QuestionService {
     private UserMapper userMapper;
 
 
-    public List<QuestionDTO> list() {
-        List<Question> questionList = questionMapper.list();
+    /**
+     * 分页查询问题
+     * @param page
+     * @param size
+     * @return
+     */
+    public PaginationDTO list(Integer page, Integer size) {
+
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount = questionMapper.count();
+        paginationDTO.setPagination(totalCount, page, size);
+
+        if (page < 1){
+            page = 1;
+        }
+        if (page > paginationDTO.getTotalPage()){
+            page = paginationDTO.getTotalPage();
+        }
+
+        // size*(page-1)
+        Integer offset = (page - 1) * size;
+        List<Question> questionList = questionMapper.list(offset, size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
+
         for (Question question : questionList) {
             User user = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -34,6 +56,8 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        return questionDTOList;
+
+        paginationDTO.setQuestions(questionDTOList);
+        return paginationDTO;
     }
 }

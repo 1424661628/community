@@ -1,5 +1,6 @@
 package com.lvmen.community.controller;
 
+import com.lvmen.community.dto.PaginationDTO;
 import com.lvmen.community.dto.QuestionDTO;
 import com.lvmen.community.mapper.QuestionMapper;
 import com.lvmen.community.mapper.UserMapper;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +29,11 @@ public class IndexController {
     private QuestionService questionService;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request, Model model) {
+    public String index(HttpServletRequest request,
+                        Model model,
+                        @RequestParam(name = "page", defaultValue = "1") Integer page,
+                        @RequestParam(name = "size", defaultValue = "5") Integer size
+                        ) {
 
         Cookie[] cookies = request.getCookies();
         if (cookies != null){ // 一个cookie都没有会出现空指针异常，所以判空
@@ -43,9 +49,9 @@ public class IndexController {
             }
         }
 
-        List<QuestionDTO> questionList = questionService.list();
+        PaginationDTO pagination = questionService.list(page, size);
 
-        model.addAttribute("questions", questionList);
+        model.addAttribute("pagination", pagination);
 
         return "index";
     }
